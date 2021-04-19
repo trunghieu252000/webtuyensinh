@@ -1,0 +1,21 @@
+﻿@model WikiCollege.Models.EF.CONTENT
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@section title {
+    Display Contennt    
+}
+
+<div class="detail-left">
+    <h1 class="detail_title">
+        @Html.Raw(Model.title)
+    </h1>
+    <i class="timer">
+        Cập nhật:  @Html.Raw(Model.created_date)
+    </i>
+    <div class="detail-content">
+        @Html.Raw(Model.detail)
+    </div>
+</div>

@@ -1,0 +1,184 @@
+﻿@using WikiCollege.Common
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>@RenderSection("title", required: true)</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/Assets/Admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/Assets/Admin/css/sb-admin-2.css?v=2.0" rel="stylesheet">
+
+    <script src="~/scripts/ckfinder/ckfinder.js"></script>
+    <script src="~/scripts/ckeditor/ckeditor.js"></script>
+    <script src="~/scripts/ckeditor/config.js"></script>
+    <script src="~/scripts/ckfinder/config.js"></script>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/Admin/Home/Index">
+                <div class="sidebar-brand-text mx-3">Wiki Admin</div>
+            </a>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <i class="fas fa-fw fa-bacon"></i>
+                    @{
+                        var x = (AccountLogin)Session["USER_SESSION"];
+                        var accID = x.accID;
+                        var accType = x.accType;
+                        var userName = x.UserName;
+                    }
+                    <span>
+                        @userName
+                    </span>
+                </a>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/Admin/Account/Edit/@accID">Profile</a>
+                        <a class="collapse-item" href="/Admin/Account/Logout">Logout</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            <!-- Nav Item - Account Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>USER</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/Admin/Account/Create">Tạo User</a>
+                        <a class="collapse-item" href="/Admin/Account/Index">Danh sách User</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - Content Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>CONTENT</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/Admin/Content/Create">Create</a>
+                        <a class="collapse-item" href="/Admin/Content/Index">Danh sách Bài viết</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - College Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCollege" aria-expanded="true" aria-controls="collapseCollege">
+                    <i class="fas fa-fw fa-atom"></i>
+                    <span>COLLEGE</span>
+                </a>
+                <div id="collapseCollege" class="collapse" aria-labelledby="headingCollege" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="">Create</a>
+                        <a class="collapse-item" href="">Danh sách Trường</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - Major Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMajor" aria-expanded="true" aria-controls="collapseMajor">
+                    <i class="fas fa-fw fa-band-aid"></i>
+                    <span>MAJOR</span>
+                </a>
+                <div id="collapseMajor" class="collapse" aria-labelledby="headingMajor" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="">Create</a>
+                        <a class="collapse-item" href="">Danh sách Ngành</a>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">@RenderSection("header", required: false)</h1>
+                    </div>
+                    @RenderBody()
+                </div>
+
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <i>Contact us: wikicollege@gmail.com</i>
+                        <p><p><span id="datetime"></span></p></p>
+                        <script type="text/javascript">
+                            var dt = new Date();
+                            setInterval(function () {
+                                document.getElementById("datetime").innerHTML = dt.toLocaleString();
+                            }, 1000);
+                        </script>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/Assets/Admin/vendor/jquery/jquery.min.js"></script>
+    <script src="/Assets/Admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/Assets/Admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <script src="~/scripts/ai.0.22.9-build00167.js"></script>
+    <script src="~/scripts/ai.0.22.9-build00167.min.js"></script>
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+
+    <script src="/Assets/Admin/js/plugins/ckfinder/ckfinder.js"></script>
+    <script src="/Assets/Admin/js/plugins/ckeditor/ckeditor.js"></script>
+
+    <script src="~/scripts/ckfinder/ckfinder.js"></script>
+    <script src="~/scripts/ckeditor/ckeditor.js"></script>
+    <script src="~/scripts/ckeditor/config.js"></script>
+    <script src="~/scripts/ckfinder/config.js"></script>
+
+
+    <!-- Custom scripts for all pages-->
+    <script src="/Assets/Admin/js/sb-admin-2.js"></script>
+    <script src="/Assets/Admin/js/sb-admin-2.min.js"></script>
+    @RenderSection("jsFooter", required: false)
+</body>
+
+</html>
